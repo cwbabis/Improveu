@@ -1,6 +1,12 @@
 module.exports = function(sequelize, DataTypes) {
   var Goal = sequelize.define("Goal", {
-    goal: DataTypes.STRING
+    goal: DataTypes.STRING,
+    userOne: DataTypes.INTEGER,
+    userTwo: DataTypes.INTEGER,
+    isFull: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   });
   /*Goal.associate = function(models) {
     // We're saying that a Post should belong to an Author
