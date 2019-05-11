@@ -14,6 +14,12 @@ module.exports = function(app) {
       res.json(dbUser);
     });
   });
+  // Create a new goal
+  app.post("/api/goal", function(req, res) {
+    db.Goal.create(req.body).then(function(dbGoal) {
+      res.json(dbGoal);
+    });
+  });
 
   // Delete an User by id
   app.delete("/api/user/:id", function(req, res) {

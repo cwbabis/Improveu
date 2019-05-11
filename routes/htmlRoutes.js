@@ -2,7 +2,6 @@
 var db = require("../models");
 
 module.exports = function(app) {
-<<<<<<< HEAD
   //display landing page
   app.get("/", function(req, res) {
     res.render("index", {
@@ -23,14 +22,6 @@ module.exports = function(app) {
       res.render("example", {
         msg: "",
         examples: dbExamples
-=======
-  // Load index page
-  app.get("/", function(req, res) {
-    db.User.findAll({}).then(function(dbUser) {
-      res.render("index", {
-        msg: "Welcome!",
-        user: dbUser
->>>>>>> master
       });
     });
   });

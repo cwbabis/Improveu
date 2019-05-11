@@ -14,7 +14,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
+      url: "api/user",
       data: JSON.stringify(input)
     });
   },
@@ -24,7 +24,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "",
+      url: "api/goal",
       data: JSON.stringify(input)
     });
   },
@@ -94,8 +94,8 @@ var handleUserFormSubmit = function(event) {
 
 var handleGoalFormSubmit = function(event) {
   event.preventDefault();
-  //I need the column information to send to db to complete this section
-/*   var data = {
+
+  var data = {
     goal: $newGoal.val().trim()
   };
 
@@ -108,7 +108,7 @@ var handleGoalFormSubmit = function(event) {
     refreshExamples();
   });
 
-  $newGoal.val(""); */
+  $newGoal.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
