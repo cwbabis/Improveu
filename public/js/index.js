@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 // Get references to page elements
-var $userName= $("#username");
+var $userName = $("#username");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
@@ -68,7 +69,7 @@ var handleFormSubmit = function(event) {
     userName: $userName.val().trim()
   };
 
-  if (!(data.userName)) {
+  if (!data.userName) {
     alert("You must enter a user name!");
     return;
   }
