@@ -28,3 +28,6 @@ textarea {
   resize: none;
   /*remove the resize handle on the bottom right*/
 }
+.collapse {
+  display: none;
+}
