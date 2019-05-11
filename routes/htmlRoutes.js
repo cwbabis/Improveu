@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 var db = require("../models");
 
 module.exports = function(app) {
+  //display landing page
   app.get("/", function(req, res) {
     res.render("index", {
       msg: "",
@@ -14,7 +16,7 @@ module.exports = function(app) {
       examples: "dbExamples"
     });
   });
-  // Load index page
+  /*   // Load index page
   app.get("/example", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("example", {
@@ -33,7 +35,7 @@ module.exports = function(app) {
         example: dbExample
       });
     });
-  });
+  }); */
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
