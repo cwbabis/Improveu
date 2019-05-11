@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 // Get references to page elements
 var $userName = $("#username");
-var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
+var $newGoal = $("#new-goal");
+var $userSubmitBtn = $("#user-submit");
+var $goalSubmitBtn = $("#goal-submit");
 var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
@@ -13,7 +14,17 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
+      url: "api/user",
+      data: JSON.stringify(input)
+    });
+  },
+  saveNewGoal: function(input) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/goal",
       data: JSON.stringify(input)
     });
   },
@@ -62,7 +73,7 @@ var refreshExamples = function() {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+var handleUserFormSubmit = function(event) {
   event.preventDefault();
 
   var data = {
@@ -81,6 +92,25 @@ var handleFormSubmit = function(event) {
   $userName.val("");
 };
 
+var handleGoalFormSubmit = function(event) {
+  event.preventDefault();
+
+  var data = {
+    goal: $newGoal.val().trim()
+  };
+
+  if (!data.goal) {
+    alert("You must enter a goal!");
+    return;
+  }
+
+  API.saveNewGoal(data).then(function() {
+    refreshExamples();
+  });
+
+  $newGoal.val("");
+};
+
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
 var handleDeleteBtnClick = function() {
@@ -94,5 +124,6 @@ var handleDeleteBtnClick = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+$userSubmitBtn.on("click", handleUserFormSubmit);
+$goalSubmitBtn.on("click", handleGoalFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
