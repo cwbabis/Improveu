@@ -1,36 +1,21 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  app.get("/", function(req, res) {
-    res.render("index", {
-      msg: "",
-      examples: "dbExamples"
-    });
-  });
-  //display dashboard
-  app.get("/dashboard", function(req, res) {
-    res.render("dashboard", {
-      msg: "",
-      examples: "dbExamples"
-    });
-  });
   // Load index page
-  app.get("/example", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.render("example", {
-        msg: "",
-        examples: dbExamples
+  app.get("/", function(req, res) {
+    db.User.findAll({}).then(function(dbUser) {
+      res.render("index", {
+        msg: "Welcome!",
+        user: dbUser
       });
     });
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render("example", {
-        example: dbExample
+  app.get("/user/:id", function(req, res) {
+    db.User.findOne({ where: { id: req.params.id } }).then(function(dbUser) {
+      res.render("user", {
+        user: dbUser
       });
     });
   });
