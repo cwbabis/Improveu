@@ -4,7 +4,6 @@ var $userName = $("#username");
 var $newGoal = $("#new-goal");
 var $userSubmitBtn = $("#user-submit");
 var $goalSubmitBtn = $("#goal-submit");
-var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -28,24 +27,21 @@ var API = {
       data: JSON.stringify(input)
     });
   },
-  getExamples: function() {
+  getGoals: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/goal",
       type: "GET"
-    });
-  },
-  deleteExample: function(id) {
-    return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
     });
   }
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+var refreshGoals = function() {
+  API.getGoals().then(function(data) {
+    console.log(data);
+    //This logic will populate the card information and display on page
+    //Need to add logic for join button to display or not
+    /*     var $examples = data.map(function(example) {
       var $a = $("<a>")
         .text(example.text)
         .attr("href", "/example/" + example.id);
@@ -67,7 +63,7 @@ var refreshExamples = function() {
     });
 
     $exampleList.empty();
-    $exampleList.append($examples);
+    $exampleList.append($examples); */
   });
 };
 
@@ -86,7 +82,7 @@ var handleUserFormSubmit = function(event) {
   }
 
   API.saveUsername(data).then(function() {
-    refreshExamples();
+    refreshGoals();
   });
 
   $userName.val("");
@@ -105,25 +101,12 @@ var handleGoalFormSubmit = function(event) {
   }
 
   API.saveNewGoal(data).then(function() {
-    refreshExamples();
+    refreshGoals();
   });
 
   $newGoal.val("");
 };
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
-
 // Add event listeners to the submit and delete buttons
 $userSubmitBtn.on("click", handleUserFormSubmit);
 $goalSubmitBtn.on("click", handleGoalFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);

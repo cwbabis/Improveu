@@ -8,6 +8,13 @@ module.exports = function(app) {
     });
   });
 
+  //Get all goals
+  app.get("/api/goal", function(req, res) {
+    db.Goal.findAll({}).then(function(dbGoal) {
+      res.json(dbGoal);
+    });
+  });
+
   // Create a new User
   app.post("/api/user", function(req, res) {
     db.User.create(req.body).then(function(dbUser) {
