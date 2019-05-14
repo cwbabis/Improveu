@@ -87,6 +87,7 @@ var handleUserFormSubmit = function(event) {
   }
   console.log(data);
   API.saveUsername(data).then(function(res) {
+    localStorage.setItem("localID", JSON.stringify(res.id));
     localStorage.setItem("userName", JSON.stringify(res.userName));
     showDashboard();
   });
