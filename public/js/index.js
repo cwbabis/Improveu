@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // Get references to page elements
-var $userName = $("#username");
+var $userName = $("#user-name");
 var $newGoal = $("#new-goal");
 var $userSubmitBtn = $("#user-submit");
 var $goalSubmitBtn = $("#goal-submit");
@@ -33,6 +33,11 @@ var API = {
       type: "GET"
     });
   }
+};
+
+//handles the submit button event to show dashboard page
+var showDashboard = function() {
+  location.href = "/dashboard";
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
@@ -73,16 +78,17 @@ var handleUserFormSubmit = function(event) {
   event.preventDefault();
 
   var data = {
-    userName: $userName.val().trim()
+    userName: $userName.val()
   };
 
-  if (!data.userName) {
+  if (data.userName === null) {
     alert("You must enter a user name!");
     return;
   }
-
-  API.saveUsername(data).then(function() {
-    refreshGoals();
+  console.log(data);
+  API.saveUsername(data).then(function(res) {
+    localStorage.setItem("userName", JSON.stringify(res.userName));
+    showDashboard();
   });
 
   $userName.val("");
@@ -108,5 +114,8 @@ var handleGoalFormSubmit = function(event) {
 };
 
 // Add event listeners to the submit and delete buttons
-$userSubmitBtn.on("click", handleUserFormSubmit);
-$goalSubmitBtn.on("click", handleGoalFormSubmit);
+
+$(document).ready(function() {
+  $userSubmitBtn.on("click", handleUserFormSubmit);
+  $goalSubmitBtn.on("click", handleGoalFormSubmit);
+});
