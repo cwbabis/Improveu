@@ -28,10 +28,10 @@ module.exports = function(app) {
     });
   });
 
-  // Delete an User by id
+  /*   // Delete an User by id
   app.delete("/api/user/:id", function(req, res) {
     db.User.destroy({ where: { id: req.params.id } }).then(function(dbUser) {
       res.json(dbUser);
     });
-  });
+  }); */
 };
