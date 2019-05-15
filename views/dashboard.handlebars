@@ -5,80 +5,83 @@
       <span class="text-muted">Toggleable via the navbar brand.</span>
     </div>
   </div>
-</div>
-<nav class="navbar navbar-dark bg-dark">
-  <div class="user-name">
-    <p class="text-light" id="local-name"></p>
   </div>
-  <button id="target" type="button" class="fas fa-plus fa-2x btn btn-success btn-circle btn-lg">
-    <script>
-      $("#target").click(function () {
-        $('#new-goal-div').show()
-      });
-    </script>
-  </button>
-</nav>
-</div>
-<br><br>
-<div id="new-goal-div" class="container collapse">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div style="margin-bottom: 15px;" class="card">
-        <div class="card-header">
-          Create New Goal!
-        </div>
-        <textarea name="" id="goal-input" cols="20" rows="3" placeholder="What's your current goal, USERNAME?"></textarea>
-        <hr style="margin: 0px;">
-        <div style="padding-top:0px; padding-bottom: 0px;"class="card-body row">
-          <button style="font-size:12px; margin:15px;" class="btn btn-primary float-left" id="goal-submit">Share Goal</button>
-          <button style="margin-right: 15px; margin-left: auto; margin-top:15px; margin-bottom: 15px;"class="btn btn-secondary fas fa-eye-slash float-right" id="hide-card">
-            <script>
-              $("#hide-card").click(function () {
-                $('#new-goal-div').hide()
-              });
-            </script>
-          </button>
-        </div>
-      </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="user-name">
+      <p class="text-light" id="local-name"></p>
     </div>
+    <button id="target" type="button" class="fas fa-plus fa-2x btn btn-success btn-circle btn-lg">
+      <script>
+        $("#target").click(function () {
+          $('#new-goal-div').show()
+        });
+      </script>
+    </button>
+  </nav>
   </div>
-  <div class="container">
+  <br><br>
+  <div id="new-goal-div" class="container collapse">
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <div class="card">
-          <div style="font-weight: bold" class="card-header">
-            Stop Eating Like Shit.
-            <div class="float-right text-muted">
-              Buddy Status: No Buddy
-            </div>
+        <div style="margin-bottom: 15px;" class="card">
+          <div class="card-header">
+            <input style="border: none; background-color: #f7f7f7" placeholder="Create A New Goal!" id="goal-title"></input>
           </div>
-
-
-
-          <div class="">
-            <img
-              style="height: 50px; width:50px; margin:15px; float: left;"
-              class="" src="https://image.flaticon.com/icons/png/128/236/236831.png">
-            <p style="padding: 15px;" class="" placeholder="">For my goal I'm trying to eat
-              more healthy. Maybe I'll try Keto again. Who knows. Someone be my buddy please.. I need a buddy... Lorem
-              ipsum dolor sit, amet consectetur adipisicing elit. Voluptates nostrum minus, perspiciatis ullam
-              voluptatem consectetur officia ab deleniti atque unde, dignissimos eum magnam dolor expedita impedit,
-              placeat repellat vitae mollitia.
-              PLEASE...</p>
-          </div>
-
-
+          <textarea name="" id="goal-input" cols="20" rows="3"
+            placeholder="What's your current goal, USERNAME?"></textarea>
           <hr style="margin: 0px;">
-          <div style="vertical-align: middle;" class="card-footer text-muted float-left">
-            15 hours ago.
-            <button href="#" style="margin-left: auto;" class="btn btn-success btn-sm float-right"
-              id="buddy-button">Buddy Up</button>
+          <div style="padding-top:0px; padding-bottom: 0px;" class="card-body row">
+            <button style="font-size:12px; margin:15px;" class="btn btn-primary float-left" id="goal-submit">Share
+              Goal</button>
+            <button style="margin-right: 15px; margin-left: auto; margin-top:15px; margin-bottom: 15px;"
+              class="btn btn-secondary fas fa-eye-slash float-right" id="hide-card">
+              <script>
+                $("#hide-card").click(function () {
+                  $('#new-goal-div').hide()
+                });
+              </script>
+            </button>
           </div>
         </div>
-
       </div>
-    </div>
-  </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <div class="card">
+              <div style="font-weight: bold" class="card-header">
+                Stop Eating Like Shit.
+                <div class="float-right text-muted">
+                  Buddy Status: No Buddy
+                </div>
+              </div>
+
+
+
+              <div class="">
+                <img style="height: 50px; width:50px; margin:15px; float: left;" class=""
+                  src="https://image.flaticon.com/icons/png/128/236/236831.png">
+                <p style="padding: 15px;" class="" placeholder="">For my goal I'm trying to eat
+                  more healthy. Maybe I'll try Keto again. Who knows. Someone be my buddy please.. I need a buddy...
+                  Lorem
+                  ipsum dolor sit, amet consectetur adipisicing elit. Voluptates nostrum minus, perspiciatis ullam
+                  voluptatem consectetur officia ab deleniti atque unde, dignissimos eum magnam dolor expedita impedit,
+                  placeat repellat vitae mollitia.
+                  PLEASE...</p>
+              </div>
+
+
+              <hr style="margin: 0px;">
+              <div style="vertical-align: middle;" class="card-footer text-muted float-left">
+                15 hours ago.
+                <button href="#" style="margin-left: auto;" class="btn btn-success btn-sm float-right"
+                  id="buddy-button">Buddy Up</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
+      </div>
 </body>
 <script src="/js/index.js"></script>
 <script src="/js/dashboard.js"></script>
