@@ -28,8 +28,8 @@
         <textarea name="" id="" cols="20" rows="3" placeholder="What's your current goal, USERNAME?"></textarea>
         <hr style="margin: 0px;">
         <div style="padding-top:0px; padding-bottom: 0px;"class="card-body row">
-          <a href="#" style="font-size:12px; margin:15px;" class="btn btn-primary float-left" id="new-goal">Share Goal</a>
-          <button href="#" style="margin-right: 15px; margin-left: auto; margin-top:15px; margin-bottom: 15px;"class="btn btn-secondary fas fa-eye-slash float-right" id="hide-card">
+          <button style="font-size:12px; margin:15px;" class="btn btn-primary float-left" id="goal-submit">Share Goal</button>
+          <button style="margin-right: 15px; margin-left: auto; margin-top:15px; margin-bottom: 15px;"class="btn btn-secondary fas fa-eye-slash float-right" id="hide-card">
             <script>
               $("#hide-card").click(function () {
                 $('#new-goal-div').hide()
@@ -41,7 +41,7 @@
     </div>
   </div>
 </div>
-<div class="container">
+<div class="container" id="main-goals">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="card">
@@ -57,5 +57,4 @@
     </div>
   </div>
 </div>
-<script src="/js/index.js"></script>
 <script src="/js/dashboard.js"></script>
