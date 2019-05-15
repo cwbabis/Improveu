@@ -74,7 +74,8 @@ var handleGoalFormSubmit = function(event) {
 
   refreshGoals();
   var data = {
-    goal: $newGoal.val().trim()
+    goal: $newGoal.val().trim(),
+    userOne: JSON.parse(localStorage.getItem("userName"))
   };
 
   if (data.goal === null) {
@@ -83,7 +84,10 @@ var handleGoalFormSubmit = function(event) {
   }
 
   dashboardAPI.saveNewGoal(data).then(function() {
-    console.log("working");
+
+    console.log(data);
+    refreshGoals();
+
   });
 
   $newGoal.val("");
