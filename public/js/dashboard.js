@@ -2,14 +2,14 @@ var $newGoal = $("#new-goal");
 var $buddyButton = $("#buddy-button");
 var goalInput = $("#goal-input");
 
-var getLocalName = function () {
+var getLocalName = function() {
   var localName = JSON.parse(localStorage.getItem("userName"));
   console.log(localName);
   $("#local-name").text(localName);
 };
 
 var dashboardAPI = {
-  saveNewGoal: function (input) {
+  saveNewGoal: function(input) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -19,7 +19,7 @@ var dashboardAPI = {
       data: JSON.stringify(input)
     });
   },
-  updateGoal: function (id, input) {
+  updateGoal: function(id, input) {
     $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -29,7 +29,7 @@ var dashboardAPI = {
       data: JSON.stringify(input)
     });
   },
-  getGoals: function () {
+  getGoals: function() {
     return $.ajax({
       url: "api/goal",
       type: "GET"
@@ -38,7 +38,7 @@ var dashboardAPI = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshGoals = function () {
+var refreshGoals = function() {
   dashboardAPI.getGoals().then(function(data) {
     console.log(data);
     for (i = 0; i < data.length; i++) {
@@ -50,6 +50,8 @@ var refreshGoals = function () {
       secondChildDiv.addClass("card");
       var thirdChildDiv = $("<div>");
       thirdChildDiv.addClass("card-header");
+      thirdChildDiv.text("This is goal " + i);
+      secondChildDiv.append(thirdChildDiv);
       childDiv.append(secondChildDiv);
       mainDiv.append(childDiv);
 
@@ -58,15 +60,11 @@ var refreshGoals = function () {
   });
 };
 
-var handleGoalFormSubmit = function (event) {
+var handleGoalFormSubmit = function(event) {
   event.preventDefault();
 
   var data = {
-<<<<<<< HEAD
-    goal: $newGoal.val(),
-=======
     goal: goalInput.val().trim(),
->>>>>>> master
     userOne: JSON.parse(localStorage.getItem("localID"))
   };
 
@@ -75,11 +73,7 @@ var handleGoalFormSubmit = function (event) {
     return;
   }
 
-<<<<<<< HEAD
-  dashboardAPI.saveNewGoal(data).then(function () {
-=======
   dashboardAPI.saveNewGoal(data).then(function() {
->>>>>>> master
     console.log(data);
     refreshGoals();
   });
@@ -87,18 +81,21 @@ var handleGoalFormSubmit = function (event) {
   $newGoal.val("");
 };
 
-var handleGoalJoin = function (event) {
-  event.default();
+var handleGoalJoin = function(event) {
+  event.preventDefault();
   var id = JSON.parse(localStorage.getItem("localID"));
   var data = {
     userTwo: id,
     isFull: true
   };
-  API.saveNewGoal(id, data).then(function () {
+  console.log(data);
+  dashboardAPI.updateGoal(id, data).then(function() {
+    console.log("sent to API")
     refreshGoals();
   });
 };
-$(document).ready(function () {
+
+$(document).ready(function() {
   getLocalName();
   $("#goal-submit").on("click", handleGoalFormSubmit);
   $buddyButton.on("click", handleGoalJoin);
