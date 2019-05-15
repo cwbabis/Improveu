@@ -1,5 +1,6 @@
 var $newGoal = $("#new-goal");
 var $buddyButton = $("#buddy-button");
+var goalInput = $("#goal-input");
 
 var getLocalName = function () {
   var localName = JSON.parse(localStorage.getItem("userName"));
@@ -61,7 +62,11 @@ var handleGoalFormSubmit = function (event) {
   event.preventDefault();
 
   var data = {
+<<<<<<< HEAD
     goal: $newGoal.val(),
+=======
+    goal: goalInput.val().trim(),
+>>>>>>> master
     userOne: JSON.parse(localStorage.getItem("localID"))
   };
 
@@ -70,11 +75,15 @@ var handleGoalFormSubmit = function (event) {
     return;
   }
 
+<<<<<<< HEAD
   dashboardAPI.saveNewGoal(data).then(function () {
+=======
+  dashboardAPI.saveNewGoal(data).then(function() {
+>>>>>>> master
     console.log(data);
     refreshGoals();
   });
-
+  refreshGoals();
   $newGoal.val("");
 };
 
