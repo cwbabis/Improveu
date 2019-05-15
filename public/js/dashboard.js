@@ -1,6 +1,7 @@
 var $newGoal = $("#new-goal");
 var $buddyButton = $("#buddy-button");
 var goalInput = $("#goal-input");
+var goalTitle = $("#goal-title");
 
 var getLocalName = function() {
   var localName = JSON.parse(localStorage.getItem("userName"));
@@ -20,7 +21,7 @@ var dashboardAPI = {
     });
   },
   updateGoal: function(id, input) {
-    $.ajax({
+    return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
@@ -64,6 +65,7 @@ var handleGoalFormSubmit = function(event) {
   event.preventDefault();
 
   var data = {
+    goalTitle: goalTitle.val().trim(),
     goal: goalInput.val().trim(),
     userOne: JSON.parse(localStorage.getItem("localID"))
   };
@@ -83,18 +85,18 @@ var handleGoalFormSubmit = function(event) {
 
 var handleGoalJoin = function(event) {
   event.preventDefault();
+  var goalID = $(this).attr("goal-id");
+  console.log(goalID);
   var id = JSON.parse(localStorage.getItem("localID"));
   var data = {
     userTwo: id,
     isFull: true
   };
-  console.log(data);
-  dashboardAPI.updateGoal(id, data).then(function() {
-    console.log("sent to API")
+
+  dashboardAPI.updateGoal(goalID, data).then(function() {
     refreshGoals();
   });
 };
-
 $(document).ready(function() {
   getLocalName();
   $("#goal-submit").on("click", handleGoalFormSubmit);

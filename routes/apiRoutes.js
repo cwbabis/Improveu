@@ -29,11 +29,20 @@ module.exports = function(app) {
   });
 
   app.put("/api/goal/:id", function(req, res) {
+    console.log(req.body);
+    console.log(req.params);
     db.Goal.update(
-      { userTwo: req.body.userTwo },
-      { isFull: req.body.isFull },
-      { where: { id: req.params.id } }
+      {
+        userTwo: req.body.id,
+        isFull: req.body.isFull
+      },
+      {
+        where: {
+          id: req.params.id
+        }
+      }
     ).then(function(rowsUpdated) {
+      console.log(rowsUpdated);
       res.json(rowsUpdated);
     });
   });
