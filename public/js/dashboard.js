@@ -2,14 +2,14 @@ var $newGoal = $("#new-goal");
 var $buddyButton = $("#buddy-button");
 var goalInput = $("#goal-input");
 
-var getLocalName = function() {
+var getLocalName = function () {
   var localName = JSON.parse(localStorage.getItem("userName"));
   console.log(localName);
   $("#local-name").text(localName);
 };
 
 var dashboardAPI = {
-  saveNewGoal: function(input) {
+  saveNewGoal: function (input) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -19,7 +19,7 @@ var dashboardAPI = {
       data: JSON.stringify(input)
     });
   },
-  updateGoal: function(id, input) {
+  updateGoal: function (id, input) {
     $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -29,7 +29,7 @@ var dashboardAPI = {
       data: JSON.stringify(input)
     });
   },
-  getGoals: function() {
+  getGoals: function () {
     return $.ajax({
       url: "api/goal",
       type: "GET"
@@ -38,43 +38,35 @@ var dashboardAPI = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshGoals = function() {
-  /*   dashboardAPI.getGoals().then(function(data) {
+var refreshGoals = function () {
+  dashboardAPI.getGoals().then(function(data) {
     console.log(data);
- */
-  //This logic will populate the card information and display on page
-  //Need to add logic for join button to display or not
-  /*     var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
- 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
- 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
- 
-      $li.append($button);
- 
-      return $li;
-    });
- 
-    $exampleList.empty();
-    $exampleList.append($examples); */
-  /*   }); */
+    for (i = 0; i < data.length; i++) {
+      var mainDiv = $("<div>");
+      mainDiv.addClass("row");
+      var childDiv = $("<div>");
+      childDiv.addClass("col-md-6 offset-md-3");
+      var secondChildDiv = $("<div>");
+      secondChildDiv.addClass("card");
+      var thirdChildDiv = $("<div>");
+      thirdChildDiv.addClass("card-header");
+      childDiv.append(secondChildDiv);
+      mainDiv.append(childDiv);
+
+      $("#main-goals").prepend(mainDiv);
+    }
+  });
 };
 
-var handleGoalFormSubmit = function(event) {
+var handleGoalFormSubmit = function (event) {
   event.preventDefault();
 
   var data = {
+<<<<<<< HEAD
+    goal: $newGoal.val(),
+=======
     goal: goalInput.val().trim(),
+>>>>>>> master
     userOne: JSON.parse(localStorage.getItem("localID"))
   };
 
@@ -83,7 +75,11 @@ var handleGoalFormSubmit = function(event) {
     return;
   }
 
+<<<<<<< HEAD
+  dashboardAPI.saveNewGoal(data).then(function () {
+=======
   dashboardAPI.saveNewGoal(data).then(function() {
+>>>>>>> master
     console.log(data);
     refreshGoals();
   });
@@ -91,18 +87,18 @@ var handleGoalFormSubmit = function(event) {
   $newGoal.val("");
 };
 
-var handleGoalJoin = function(event) {
+var handleGoalJoin = function (event) {
   event.default();
   var id = JSON.parse(localStorage.getItem("localID"));
   var data = {
     userTwo: id,
     isFull: true
   };
-  API.saveNewGoal(id, data).then(function() {
+  API.saveNewGoal(id, data).then(function () {
     refreshGoals();
   });
 };
-$(document).ready(function() {
+$(document).ready(function () {
   getLocalName();
   $("#goal-submit").on("click", handleGoalFormSubmit);
   $buddyButton.on("click", handleGoalJoin);
