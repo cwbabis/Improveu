@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "bloodmaster17",
+    "password": "",
     "database": "improvedb",
     "host": "localhost",
     "dialect": "mysql"
