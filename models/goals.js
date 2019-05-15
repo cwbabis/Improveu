@@ -1,5 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Goal = sequelize.define("Goal", {
+    goalTitle: DataTypes.STRING,
     goal: DataTypes.STRING,
     userOne: DataTypes.INTEGER,
     userTwo: DataTypes.INTEGER,
