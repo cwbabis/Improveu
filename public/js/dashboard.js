@@ -21,7 +21,7 @@ var dashboardAPI = {
     });
   },
   updateGoal: function(id, input) {
-    $.ajax({
+    return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
@@ -51,6 +51,8 @@ var refreshGoals = function() {
       secondChildDiv.addClass("card");
       var thirdChildDiv = $("<div>");
       thirdChildDiv.addClass("card-header");
+      thirdChildDiv.text("This is goal " + i);
+      secondChildDiv.append(thirdChildDiv);
       childDiv.append(secondChildDiv);
       mainDiv.append(childDiv);
 
@@ -82,13 +84,16 @@ var handleGoalFormSubmit = function(event) {
 };
 
 var handleGoalJoin = function(event) {
-  event.default();
+  event.preventDefault();
+  var goalID = $(this).attr("goal-id");
+  console.log(goalID);
   var id = JSON.parse(localStorage.getItem("localID"));
   var data = {
     userTwo: id,
     isFull: true
   };
-  API.saveNewGoal(id, data).then(function() {
+
+  dashboardAPI.updateGoal(goalID, data).then(function() {
     refreshGoals();
   });
 };
