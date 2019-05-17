@@ -1,6 +1,7 @@
 var $newGoal = $("#new-goal");
-var $buddyButton = $("#buddy-button");
+
 var goalInput = $("#goal-input");
+var goalTitle = $("#goal-title");
 
 var getLocalName = function() {
   var localName = JSON.parse(localStorage.getItem("userName"));
@@ -20,7 +21,7 @@ var dashboardAPI = {
     });
   },
   updateGoal: function(id, input) {
-    $.ajax({
+    return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
@@ -39,41 +40,79 @@ var dashboardAPI = {
 
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshGoals = function() {
-  /*   dashboardAPI.getGoals().then(function(data) {
+  dashboardAPI.getGoals().then(function(data) {
     console.log(data);
- */
-  //This logic will populate the card information and display on page
-  //Need to add logic for join button to display or not
-  /*     var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
- 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
- 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
- 
-      $li.append($button);
- 
-      return $li;
-    });
- 
-    $exampleList.empty();
-    $exampleList.append($examples); */
-  /*   }); */
+    for (i = 0; i < data.length; i++) {
+      var mainDiv = $("<div>");
+      mainDiv.addClass("row");
+
+      var childDiv = $("<div>");
+      childDiv.addClass("col-md-6 offset-md-3");
+
+      var secondChildDiv = $("<div>");
+      secondChildDiv.addClass("card");
+
+      var thirdChildDiv = $("<div>");
+      thirdChildDiv.addClass("card-header");
+      thirdChildDiv.attr("style", "font-weight: bold");
+      thirdChildDiv.text(data[i].goalTitle);
+
+      var fourthChildDiv = $("<div>");
+      fourthChildDiv.addClass("float-right text-muted");
+      fourthChildDiv.text("Buddy Status");
+
+      var fifthChildDiv = $("<div>");
+      var imgDiv = $("<img>");
+      imgDiv.attr(
+        "style",
+        "height: 50px; width:50px; margin:15px; float: left;"
+      );
+      imgDiv.attr(
+        "src",
+        "https://image.flaticon.com/icons/png/128/236/236831.png"
+      );
+      var goalContent = $("<p>");
+      goalContent.attr("style", "padding: 15px;");
+      goalContent.text(data[i].goal);
+      fifthChildDiv.append(imgDiv);
+      fifthChildDiv.append(goalContent);
+
+      var hTag = $("<hr>");
+      hTag.attr("style", "margin: 0px;");
+
+      var lastOne = $("<div>");
+      lastOne.attr("style", "vertical-align: middle;");
+      lastOne.addClass("card-footer text-muted float-left");
+
+      var buddyButton = $("<button>");
+      buddyButton.attr("style", "margin-left: auto;");
+      buddyButton.attr("goal-id", data[i].id);
+      buddyButton.attr("id", "buddy-button");
+      buddyButton.addClass("btn btn-success btn-sm float-right buddy-button");
+      buddyButton.text("Buddy Up");
+
+      if (data[i].isFull === false) {
+        lastOne.append(buddyButton);
+      }
+
+      thirdChildDiv.append(fourthChildDiv);
+      secondChildDiv.append(thirdChildDiv);
+      secondChildDiv.append(fifthChildDiv);
+      secondChildDiv.append(hTag);
+      secondChildDiv.append(lastOne);
+      childDiv.append(secondChildDiv);
+      mainDiv.append(childDiv);
+
+      $("#main-goals").prepend(mainDiv);
+    }
+  });
 };
 
 var handleGoalFormSubmit = function(event) {
   event.preventDefault();
 
   var data = {
+    goalTitle: goalTitle.val().trim(),
     goal: goalInput.val().trim(),
     userOne: JSON.parse(localStorage.getItem("localID"))
   };
@@ -87,23 +126,29 @@ var handleGoalFormSubmit = function(event) {
     console.log(data);
     refreshGoals();
   });
-  refreshGoals();
+
   $newGoal.val("");
 };
 
 var handleGoalJoin = function(event) {
-  event.default();
+  event.preventDefault();
+  var goalID = $(this).attr("goal-id");
+  console.log(goalID);
   var id = JSON.parse(localStorage.getItem("localID"));
   var data = {
     userTwo: id,
     isFull: true
   };
-  API.saveNewGoal(id, data).then(function() {
-    refreshGoals();
+
+  dashboardAPI.updateGoal(goalID, data).then(function() {
+    location.reload();
   });
 };
+
+
 $(document).ready(function() {
   getLocalName();
+  refreshGoals();
   $("#goal-submit").on("click", handleGoalFormSubmit);
-  $buddyButton.on("click", handleGoalJoin);
+  $(document).on("click", ".buddy-button", handleGoalJoin);
 });
