@@ -1,6 +1,8 @@
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define("User", {
-    userPhoto: DataTypes.STRING,
+    userPhoto: {
+      type: DataTypes.STRING(1000)
+    },
     userName: DataTypes.STRING
   });
   return User;
