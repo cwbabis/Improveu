@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 // Get references to page elements
+var userPhoto = $("#user-photo");
 var $userName = $("#user-name");
 var $userSubmitBtn = $("#user-submit");
 
@@ -28,6 +29,7 @@ var handleUserFormSubmit = function(event) {
   event.preventDefault();
 
   var data = {
+    userPhoto: userPhoto.val().trim(),
     userName: $userName.val()
   };
 
@@ -39,6 +41,7 @@ var handleUserFormSubmit = function(event) {
   API.saveUsername(data).then(function(res) {
     localStorage.setItem("localID", JSON.stringify(res.id));
     localStorage.setItem("userName", JSON.stringify(res.userName));
+    localStorage.setItem("userPhoto", JSON.stringify(res.userPhoto));
     //insert passport here
     showDashboard();
   });
