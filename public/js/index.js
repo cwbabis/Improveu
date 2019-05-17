@@ -29,7 +29,7 @@ var handleUserFormSubmit = function(event) {
   event.preventDefault();
 
   var data = {
-    userPhoto: userPhoto.val().trim(),
+    userPhoto: userPhoto.val(),
     userName: $userName.val()
   };
 
