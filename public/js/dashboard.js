@@ -106,7 +106,7 @@ var refreshGoals = function() {
       secondChildDiv.append(lastOne);
       childDiv.append(secondChildDiv);
       mainDiv.append(childDiv);
-
+      $("#main-goals").prepend($("<br>"));
       $("#main-goals").prepend(mainDiv);
     }
   });
