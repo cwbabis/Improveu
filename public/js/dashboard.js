@@ -59,7 +59,11 @@ var refreshGoals = function() {
 
       var fourthChildDiv = $("<div>");
       fourthChildDiv.addClass("float-right text-muted");
-      fourthChildDiv.text("Buddy Status");
+      if (data[i].isFull === false) {
+        fourthChildDiv.text("Buddy Status: No Buddy");
+      } else {
+        fourthChildDiv.text("Buddy Status: Buddy'd Up");
+      }
 
       var fifthChildDiv = $("<div>");
       var imgDiv = $("<img>");
@@ -144,7 +148,6 @@ var handleGoalJoin = function(event) {
     location.reload();
   });
 };
-
 
 $(document).ready(function() {
   getLocalName();
