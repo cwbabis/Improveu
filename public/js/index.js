@@ -39,6 +39,7 @@ var handleUserFormSubmit = function(event) {
   API.saveUsername(data).then(function(res) {
     localStorage.setItem("localID", JSON.stringify(res.id));
     localStorage.setItem("userName", JSON.stringify(res.userName));
+    //insert passport here
     showDashboard();
   });
 

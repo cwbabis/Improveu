@@ -1,5 +1,5 @@
 var $newGoal = $("#new-goal");
-var $buddyButton = $("#buddy-button");
+
 var goalInput = $("#goal-input");
 var goalTitle = $("#goal-title");
 
@@ -45,14 +45,61 @@ var refreshGoals = function() {
     for (i = 0; i < data.length; i++) {
       var mainDiv = $("<div>");
       mainDiv.addClass("row");
+
       var childDiv = $("<div>");
       childDiv.addClass("col-md-6 offset-md-3");
+
       var secondChildDiv = $("<div>");
       secondChildDiv.addClass("card");
+
       var thirdChildDiv = $("<div>");
       thirdChildDiv.addClass("card-header");
-      thirdChildDiv.text("This is goal " + i);
+      thirdChildDiv.attr("style", "font-weight: bold");
+      thirdChildDiv.text(data[i].goalTitle);
+
+      var fourthChildDiv = $("<div>");
+      fourthChildDiv.addClass("float-right text-muted");
+      fourthChildDiv.text("Buddy Status");
+
+      var fifthChildDiv = $("<div>");
+      var imgDiv = $("<img>");
+      imgDiv.attr(
+        "style",
+        "height: 50px; width:50px; margin:15px; float: left;"
+      );
+      imgDiv.attr(
+        "src",
+        "https://image.flaticon.com/icons/png/128/236/236831.png"
+      );
+      var goalContent = $("<p>");
+      goalContent.attr("style", "padding: 15px;");
+      goalContent.text(data[i].goal);
+      fifthChildDiv.append(imgDiv);
+      fifthChildDiv.append(goalContent);
+
+      var hTag = $("<hr>");
+      hTag.attr("style", "margin: 0px;");
+
+      var lastOne = $("<div>");
+      lastOne.attr("style", "vertical-align: middle;");
+      lastOne.addClass("card-footer text-muted float-left");
+
+      var buddyButton = $("<button>");
+      buddyButton.attr("style", "margin-left: auto;");
+      buddyButton.attr("goal-id", data[i].id);
+      buddyButton.attr("id", "buddy-button");
+      buddyButton.addClass("btn btn-success btn-sm float-right buddy-button");
+      buddyButton.text("Buddy Up");
+
+      if (data[i].isFull === false) {
+        lastOne.append(buddyButton);
+      }
+
+      thirdChildDiv.append(fourthChildDiv);
       secondChildDiv.append(thirdChildDiv);
+      secondChildDiv.append(fifthChildDiv);
+      secondChildDiv.append(hTag);
+      secondChildDiv.append(lastOne);
       childDiv.append(secondChildDiv);
       mainDiv.append(childDiv);
 
@@ -79,7 +126,7 @@ var handleGoalFormSubmit = function(event) {
     console.log(data);
     refreshGoals();
   });
-  refreshGoals();
+
   $newGoal.val("");
 };
 
@@ -94,11 +141,14 @@ var handleGoalJoin = function(event) {
   };
 
   dashboardAPI.updateGoal(goalID, data).then(function() {
-    refreshGoals();
+    location.reload();
   });
 };
+
+
 $(document).ready(function() {
   getLocalName();
+  refreshGoals();
   $("#goal-submit").on("click", handleGoalFormSubmit);
-  $buddyButton.on("click", handleGoalJoin);
+  $(document).on("click", ".buddy-button", handleGoalJoin);
 });
