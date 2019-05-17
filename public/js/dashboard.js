@@ -145,7 +145,6 @@ var handleGoalJoin = function(event) {
   });
 };
 
-
 $(document).ready(function() {
   getLocalName();
   refreshGoals();
