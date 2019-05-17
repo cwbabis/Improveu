@@ -6,11 +6,16 @@
     </div>
   </div>
   </div>
-  <nav class="navbar navbar-dark bg-dark">
+  <nav style="text-align:center" class="navbar navbar-dark bg-dark">
     <div class="user-name">
       <!-- style names -->
-      <p class="text-light" id="local-name"></p>
+      <p style="vertical-align:middle; margin-bottom: 0;" class="text-light" id="local-name"></p>
     </div>
+    
+    <div style="position: fixed; left:43.5%; text-align:center; color: White; font-family: 'Work Sans', sans-serif;">
+      <h1>Improveu</h1>
+    </div>
+    
     <button id="target" type="button" class="fas fa-plus fa-2x btn btn-success btn-circle btn-lg">
       <script>
         $("#target").click(function () {
@@ -19,12 +24,13 @@
       </script>
     </button>
   </nav>
+
   </div>
-  <br><br>
+<br>
   <div id="new-goal-div" class="container collapse">
     <div class="row">
       <div class="col-md-6 offset-md-3">
-        <div style="margin-bottom: 15px;" class="card">
+        <div class="card">
           <div class="card-header">
             <input style="border: none; background-color: #f7f7f7" placeholder="Create A New Goal!"
               id="goal-title"></input>
@@ -48,19 +54,51 @@
       </div>
     </div>
   </div>
-  <div class="container">
+
+
+
+  <br>
+  <div class="container" id="main-goals">
+    {{!-- <div style="font-weight: bold" class="container card-header">Goal Feed</div> --}}
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div class="card">
-          <div style="font-weight: bold" class="card-header">
+          <div style="line-height:2; vertical-align: middle;" class="card-header">
+            Goal Feed
+            <div class="btn-group float-right text-muted">
+              Sort Goals by: &nbsp;
+              <button class="btn btn-secondary btn-sm" type="button">
+                Trending
+              </button>
+              <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Trending</span>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Top</a>
+                <a class="dropdown-item" href="#">Rising</a>
+                <a class="dropdown-item" href="#">Controversial</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <br>
+
+  <div class="container" id="main-goals">
+    {{!-- <div style="font-weight: bold" class="container card-header">Goal Feed</div> --}}
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div style="font-weight: bold;" class="card-header">
             Stop Eating Like Shit.
             <div class="float-right text-muted">
               Buddy Status: No Buddy
             </div>
           </div>
-
-
-
           <div class="">
             <img style="height: 50px; width:50px; margin:15px; float: left;" class=""
               src="https://image.flaticon.com/icons/png/128/236/236831.png">
@@ -77,7 +115,7 @@
           <hr style="margin: 0px;">
           <div style="vertical-align: middle;" class="card-footer text-muted float-left">
             15 hours ago.
-            <button href="#" style="margin-left: auto;" class="btn btn-success btn-sm float-right"
+            <button href="#" style="margin-left: auto;" goal-id="0" class="btn btn-success btn-sm float-right"
               id="buddy-button">Buddy Up</button>
           </div>
         </div>
