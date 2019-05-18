@@ -69,7 +69,7 @@ var refreshGoals = function() {
       var imgDiv = $("<img>");
       imgDiv.attr(
         "style",
-        "height: 50px; width:100px; margin:15px; float: left;"
+        "height: 50px; width:50px; margin:15px; float: left;"
       );
       imgDiv.attr("src", data[i].userOneProfile);
       var goalContent = $("<p>");
