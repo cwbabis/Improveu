@@ -1,5 +1,4 @@
 var db = require("../models");
-const { format, render, cancel, register } = require('timeago.js');
 
 module.exports = function(app) {
   // Get all user
@@ -12,11 +11,6 @@ module.exports = function(app) {
   //Get all goals
   app.get("/api/goal", function(req, res) {
     db.Goal.findAll({}).then(function(dbGoal) {
-      for (i=0; i<dbGoal.length; i++) {
-       format(dbGoal[0].createdAt, 'en_US'); 
-       console.log(dbGoal[0].createdAt);
-      };
-      
       res.json(dbGoal);
     });
   });
