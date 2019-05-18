@@ -92,6 +92,14 @@ var refreshGoals = function() {
       buddyButton.addClass("btn btn-success btn-sm float-right buddy-button");
       buddyButton.text("Buddy Up");
 
+      var timeStamp = $("<time>");
+      timeStamp.addClass("float-left timeago");
+      var prettyTime = data[i].createdAt;
+      timeStamp.attr("datetime", prettyTime);
+      var timeCons = new Date(prettyTime);
+      timeStamp.text(timeCons.toDateString());
+      lastOne.append(timeStamp);
+
       if (data[i].isFull === false) {
         lastOne.append(buddyButton);
       }
