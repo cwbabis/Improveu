@@ -3,6 +3,9 @@ module.exports = function(sequelize, DataTypes) {
     goalTitle: DataTypes.STRING,
     goal: DataTypes.STRING,
     userOne: DataTypes.INTEGER,
+    userOneProfile: {
+      type: DataTypes.STRING(1000)
+    },
     userTwo: DataTypes.INTEGER,
     isFull: {
       type: DataTypes.BOOLEAN,
