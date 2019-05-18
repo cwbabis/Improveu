@@ -69,12 +69,9 @@ var refreshGoals = function() {
       var imgDiv = $("<img>");
       imgDiv.attr(
         "style",
-        "height: 50px; width:50px; margin:15px; float: left;"
+        "height: 50px; width:100px; margin:15px; float: left;"
       );
-      imgDiv.attr(
-        "src",
-        "https://image.flaticon.com/icons/png/128/236/236831.png"
-      );
+      imgDiv.attr("src", data[i].userOneProfile);
       var goalContent = $("<p>");
       goalContent.attr("style", "padding: 15px;");
       goalContent.text(data[i].goal);
@@ -118,7 +115,8 @@ var handleGoalFormSubmit = function(event) {
   var data = {
     goalTitle: goalTitle.val().trim(),
     goal: goalInput.val().trim(),
-    userOne: JSON.parse(localStorage.getItem("localID"))
+    userOne: JSON.parse(localStorage.getItem("localID")),
+    userOneProfile: JSON.parse(localStorage.getItem("userPhoto"))
   };
 
   if (data.goal === null) {
@@ -152,6 +150,7 @@ var handleGoalJoin = function(event) {
 $(document).ready(function() {
   getLocalName();
   refreshGoals();
+  $("#userPhoto").attr("src", JSON.parse(localStorage.getItem("userPhoto")));
   $("#goal-submit").on("click", handleGoalFormSubmit);
   $(document).on("click", ".buddy-button", handleGoalJoin);
 });
